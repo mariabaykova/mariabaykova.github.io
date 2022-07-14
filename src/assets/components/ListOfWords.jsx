@@ -35,14 +35,13 @@ export default function ListOfWords() {
           padding: 1.5,
         }}
       >
-        {Array.from(listOfWords).map((_, index) => (
+        {listOfWords.map((wCard, index) => (
           <Grid item xs={6} sm={4} md={2} key={index}>
             <WordCard
-              english={_.english}
-              transcription={_.transcription}
-              russian={_.russian}
-              tags={_.tags}
-              isExpanded={false}
+              english={wCard.english}
+              transcription={wCard.transcription}
+              russian={wCard.russian}
+              tags={wCard.tags}
             />
           </Grid>
         ))}
