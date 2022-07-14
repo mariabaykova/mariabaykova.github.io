@@ -3,9 +3,8 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-// import Fab from "@mui/material/Fab";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,14 +15,14 @@ import TextField from "@mui/material/TextField";
 import styles from "../styles/ListOfWords.module.scss";
 
 export default function WordCard(props) {
-  // let isExpanded = props.isExpanded;
-  // function expandWordCard() {
-  //   // alert("expand word card");
-  //   isExpanded = true;
-  // }
   const [editMode, setEditMode] = React.useState(false);
+  const [saved, setSaved] = React.useState(false);
 
   const handleEditClick = () => {
+    setEditMode(!editMode);
+  };
+  const handleSaveClick = () => {
+    setSaved(!saved);
     setEditMode(!editMode);
   };
   return (
@@ -34,8 +33,7 @@ export default function WordCard(props) {
           mt: -0.5,
           mx: -0.5,
           boxShadow: 24,
-          //   minWidth: 200,
-          //   height: 210,
+
           zIndex: "tooltip",
           cursor: "pointer",
         },
@@ -54,14 +52,12 @@ export default function WordCard(props) {
             <TextField
               required
               id="wordEng"
-              // label="English"
               size="small"
               defaultValue={props.english}
             />
             <TextField
               required
               id="wordTrnscr"
-              // label="Transcription"
               size="small"
               className={styles.input}
               defaultValue={props.transcription}
@@ -69,7 +65,6 @@ export default function WordCard(props) {
             <TextField
               required
               id="wordRus"
-              // label="Transcription"
               size="small"
               className={styles.input}
               defaultValue={props.russian}
@@ -89,7 +84,7 @@ export default function WordCard(props) {
       </CardContent>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         {editMode ? (
-          <IconButton aria-label="save">
+          <IconButton aria-label="save" onClick={handleSaveClick}>
             <SaveIcon />
           </IconButton>
         ) : (
