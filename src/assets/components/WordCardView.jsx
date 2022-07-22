@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import ShowTranslIcon from "@mui/icons-material/ExpandMore";
@@ -15,7 +14,7 @@ export default function WordCardView(props) {
     props.showTranslation || false
   );
   const handleShowTranslation = () => {
-    setShowTranslation(!showTranslation);
+    setShowTranslation((prevState) => !prevState);
   };
   return (
     <Card
@@ -45,9 +44,6 @@ export default function WordCardView(props) {
           </Box>
         )}
       </CardContent>
-      <CardActions
-        sx={{ display: "flex", justifyContent: "space-between" }}
-      ></CardActions>
     </Card>
   );
 }

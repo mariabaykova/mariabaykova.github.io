@@ -15,7 +15,7 @@ export default function WordCardEdit(props) {
   const [saved, setSaved] = React.useState(false);
   // изменения сохранены при клике на иконку "сохранить" SaveIcon
   const handleSaveClick = () => {
-    setSaved(!saved);
+    setSaved((prevState) => !prevState);
   };
 
   // вводим состояние "карточка удалена"
