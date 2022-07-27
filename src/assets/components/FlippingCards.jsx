@@ -12,57 +12,100 @@ export default function FlippingCards(props) {
   const listOfWords = props.listOfWords;
   // в состоянии этого компонента хранится индекс карточки, которую нужно показать
   // нажатие на стрелки двигает этот индекс и при отрисовке показывается карточка с нужным индексом
+  const [cardToShow, setCardToShow] = React.useState(0);
 
   // определить длину переданного списка.
+  const listLength = listOfWords.length;
   // если список пуст, выдать сообщение и не показывать стрелки и карточку
+  // показать картинку с изображением "ничего нет"
 
   // если текущий индекс = 0, то стрелку назад не показывать
   // если текущий индекс равен длине списка - 1, то не показываем стрелку вперед
 
   // для маленьких экранов - не показывать стрелки, а показать перелистывание
   return (
-    <Box
-      sx={{
-        // flexGrow: 1,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        columnGap: 3,
-        padding: { xs: 1, sm: 4 },
-        // margin: 2,
-        // alignSelf: "center",
-        borderStyle: "dotted",
-      }}
-    >
-      <IconButton aria-label="back">
-        <ArrowBack />
-      </IconButton>
-      <Box sx={{ width: { xs: 10 / 10, sm: 1 / 2, md: 1 / 3, lg: 1 / 5 } }}>
-        <WordCardView english="cat" russian="кошка" transcription="dfsnkfj" />
-      </Box>
-      <IconButton aria-label="forward">
-        <ArrowForward />
-      </IconButton>
-      {/* <Grid
-        container
-        spacing={{ xs: 2, md: 2 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
+    <>
+      <Box
         sx={{
-          padding: 1.5,
+          // flexGrow: 1,
+          // display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          columnGap: 3,
+          padding: { xs: 1, sm: 4 },
+          // margin: 2,
+          // alignSelf: "center",
+          borderStyle: "dotted",
+          display: { xs: "none", sm: "flex" },
+        }}
+      >
+        {cardToShow > 0 ? (
+          <IconButton
+            aria-label="back"
+            onClick={() => setCardToShow((prevCardId) => prevCardId - 1)}
+          >
+            <ArrowBack />
+          </IconButton>
+        ) : (
+          <IconButton aria-label="back" sx={{ visibility: "hidden" }}>
+            <ArrowBack />
+          </IconButton>
+        )}
+        <Box
+          sx={{
+            width: { xs: 10 / 10, sm: 1 / 2, md: 1 / 3, lg: 1 / 5 },
+          }}
+        >
+          <WordCardView
+            english={listOfWords[cardToShow].english}
+            russian={listOfWords[cardToShow].russian}
+            transcription={listOfWords[cardToShow].transcription}
+            showTransl={false}
+          />
+        </Box>
+        {cardToShow < listLength - 1 ? (
+          <IconButton
+            aria-label="forward"
+            onClick={() => setCardToShow((prevCardId) => prevCardId + 1)}
+          >
+            <ArrowForward />
+          </IconButton>
+        ) : (
+          <IconButton aria-label="forward" sx={{ visibility: "hidden" }}>
+            <ArrowForward />
+          </IconButton>
+        )}
+      </Box>
+      {/* для маленьких экранов */}
+      <Box
+        sx={{
+          // flexGrow: 1,
+          scrollSnapType: "x mandatory",
+          // display: "flex",
+          webkitOwerflowScrolling: "touch",
+          overflowX: "scroll",
+          borderStyle: "dotted",
+          display: { xs: "flex", sm: "none" },
         }}
       >
         {listOfWords.map((wCard, index) => (
-          <Grid item xs={6} sm={4} md={2} key={index}>
-            <WordCardMini
+          <Box
+            sx={{
+              scrollSnapAlign: "start",
+              minWidth: "100%",
+              height: "100%",
+            }}
+          >
+            <WordCardView
               english={wCard.english}
               transcription={wCard.transcription}
               russian={wCard.russian}
               tags={wCard.tags}
               id={wCard.id}
             />
-          </Grid>
+          </Box>
         ))}
-      </Grid> */}
-    </Box>
+      </Box>
+    </>
   );
 }

@@ -19,16 +19,11 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  // minWidth: 1 / 4,
-  // width: AutoAwesome,
-  // minWidth={{ xs: "3 / 4", md: "1 / 4" }},
-  // width: 1 / 2,
   width: { xs: 7 / 8, sm: 1 / 2, md: 1 / 3 },
   bgcolor: "background.paper",
   border: "2px solid gray",
   borderRadius: 3,
   boxShadow: 24,
-  // p: 4,
 };
 
 export default function WordCardMini(props) {
