@@ -50,6 +50,7 @@ export default function WordCardMini(props) {
       <Card
         sx={{
           minWidth: 150,
+          minHeight: 152,
           "&:hover": {
             mt: -0.5,
             mx: -0.5,
@@ -58,6 +59,9 @@ export default function WordCardMini(props) {
             zIndex: "tooltip",
             cursor: "pointer",
           },
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
         <CardContent sx={{ display: "flex", justifyContent: "center" }}>

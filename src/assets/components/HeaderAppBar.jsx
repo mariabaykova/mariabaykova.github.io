@@ -1,9 +1,4 @@
-// import styles from "../styles/Header.module.scss";
-// export default function Header(props) {
-//   return <header className={styles.header}>{props.title}</header>;
-// }
 import * as React from "react";
-// import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,21 +11,16 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Slide from "@mui/material/Slide";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-import AdbIcon from "@mui/icons-material/School";
+import SchoolIcon from "@mui/icons-material/School";
 
 const pages = ["Home", "Flip"];
 
 function HeaderAppBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  // const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-    console.log("setAnchorElNav event.currentTarget " + event.currentTarget);
   };
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
 
   const handleCloseNavMenu = () => {
     console.log("handleCloseNavMenu ");
@@ -42,10 +32,6 @@ function HeaderAppBar(props) {
     props.onMenuClick(event.currentTarget.textContent);
     setAnchorElNav(null);
   };
-
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
 
   function HideOnScroll(props) {
     const { children, window } = props;
@@ -65,10 +51,25 @@ function HeaderAppBar(props) {
 
   return (
     <HideOnScroll>
-      <AppBar position="sticky" sx={{ backgroundColor: "#818ca8" }}>
+      <AppBar
+        position="sticky"
+        sx={{
+          backgroundColor: "#818ca8",
+        }}
+      >
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Toolbar
+            disableGutters
+            sx={{
+              display: "flex",
+            }}
+          >
+            <SchoolIcon
+              sx={{
+                display: { xs: "none", md: "flex" },
+                mr: 1,
+              }}
+            />
             <Typography
               variant="h6"
               noWrap
@@ -86,7 +87,13 @@ function HeaderAppBar(props) {
             >
               LEARN WORDS
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            {/* меню бургер для маленьких экранов */}
+            <Box
+              sx={{
+                flexGrow: 0,
+                display: { xxs: "flex", md: "none" },
+              }}
+            >
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -122,30 +129,41 @@ function HeaderAppBar(props) {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+            <SchoolIcon
+              sx={{
+                display: { xs: "flex", sm: "flex", md: "none" },
+                mr: 1,
+                flexGrow: 0,
+                justifyContent: "right",
+              }}
+            />
+            {/* заголовок для маленьких экранов */}
             <Typography
               variant="h5"
-              noWrap
+              // wrap="true"
               component="a"
               href=""
               sx={{
-                mr: 2,
                 display: { xs: "flex", md: "none" },
-                flexGrow: 1,
+                flexGrow: 0,
+                // flexShrink: 1,
                 fontFamily: "monospace",
                 fontWeight: 700,
-                letterSpacing: ".3rem",
+                letterSpacing: ".2rem",
                 color: "inherit",
                 textDecoration: "none",
+                alignSelf: "right",
+                textAlign: "right",
+                mr: 0,
               }}
             >
               LEARN WORDS
             </Typography>
+            {/* меню для больших экранов, скрыто для маленьких */}
             <Box
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
-                // borderColor: red[A700],
               }}
             >
               {pages.map((page) => (
@@ -158,38 +176,6 @@ function HeaderAppBar(props) {
                 </Button>
               ))}
             </Box>
-            {/* <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar
-                    alt="Maria Baykova"
-                    src="/static/images/avatar/2.jpg"
-                  />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box> */}
           </Toolbar>
         </Container>
       </AppBar>
